@@ -16,28 +16,28 @@ namespace la_mia_pizzeria_static.Controllers
         public IActionResult Index()
         {
 
-            return View(Pizzas());
+            return View();
         }
 
-        public IActionResult Detail(int id)
+      /*  public IActionResult Detail(int id)
         {
             
             return View(Pizzas()[id]);
-        }
+        }*/
 
-        public List<Pizza> Pizzas()
+/*        public List<Pizza> Pizzas()
         {
             List<Pizza> pizze = new List<Pizza> {
 
-                new Pizza(0, "Margherita", "Pomodoro, Mozzarella", "/img/pizza-margherita.jpg", 5),
-                new Pizza(1, "Diavola", "Pomodoro, Mozzarella, salame piccante", "/img/pizza-diavola.jpg", 7),
-                new Pizza(2, "Marinara", "Pomodoro", "/img/pizza-marinara.jpg", 4),
-                new Pizza(3, "Salsiccia", "Pomodoro, Mozzarella, salsiccia", "/img/pizza-salsiccia.jpg", 7),
+                new Pizza( "Margherita", "Pomodoro, Mozzarella", "/img/pizza-margherita.jpg", 5),
+                new Pizza( "Diavola", "Pomodoro, Mozzarella, salame piccante", "/img/pizza-diavola.jpg", 7),
+                new Pizza( "Marinara", "Pomodoro", "/img/pizza-marinara.jpg", 4),
+                new Pizza( "Salsiccia", "Pomodoro, Mozzarella, salsiccia", "/img/pizza-salsiccia.jpg", 7),
 
             };
 
             return pizze;
-        }
+        }*/
 
             public IActionResult Privacy()
         {

@@ -2,14 +2,14 @@
 {
     public class Pizza
     {
-        public Pizza(int id, string name, string description, string image, double price)
+      /*  public Pizza(int id, string name, string description, string image, double price)
         {
             PizzaId = id;
             Name = name;
             Description = description;
             Image = image;
             Price = price;
-        }
+        }*/
 
         public int PizzaId { get; set; }
         public string Name { get; set; }
