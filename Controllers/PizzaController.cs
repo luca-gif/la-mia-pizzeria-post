@@ -1,5 +1,7 @@
-﻿using la_mia_pizzeria_static.Models;
+﻿using la_mia_pizzeria_static.Context;
+using la_mia_pizzeria_static.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
 
 namespace la_mia_pizzeria_static.Controllers
@@ -19,27 +21,60 @@ namespace la_mia_pizzeria_static.Controllers
             return View();
         }
 
-      /*  public IActionResult Detail(int id)
+        [HttpGet]
+        public IActionResult CreateGet()
         {
+            return View("Create");
+        }
+
+
+        [HttpPost]
+        public IActionResult Create(Pizza data)
+        {
+            if (ModelState.IsValid)
+            {
+                return View(data);
+            }
             
-            return View(Pizzas()[id]);
-        }*/
+         
+            using(Restaurant restaurant = new Restaurant())
+            {
+                Pizza newPizza = new Pizza(); //creo nuova pizza
 
-/*        public List<Pizza> Pizzas()
-        {
-            List<Pizza> pizze = new List<Pizza> {
+                newPizza.Name = data.Name;
+                newPizza.Image = data.Image;
+                newPizza.Description = data.Description;
+                newPizza.Price = data.Price;
 
-                new Pizza( "Margherita", "Pomodoro, Mozzarella", "/img/pizza-margherita.jpg", 5),
-                new Pizza( "Diavola", "Pomodoro, Mozzarella, salame piccante", "/img/pizza-diavola.jpg", 7),
-                new Pizza( "Marinara", "Pomodoro", "/img/pizza-marinara.jpg", 4),
-                new Pizza( "Salsiccia", "Pomodoro, Mozzarella, salsiccia", "/img/pizza-salsiccia.jpg", 7),
+                restaurant.ListaPizze.Add(newPizza);
+                restaurant.SaveChanges();
+            }
 
-            };
+            return RedirectToAction("Index");
+        }
 
-            return pizze;
-        }*/
 
-            public IActionResult Privacy()
+        /*  public IActionResult Detail(int id)
+          {
+
+              return View(Pizzas()[id]);
+          }*/
+
+        /*        public List<Pizza> Pizzas()
+                {
+                    List<Pizza> pizze = new List<Pizza> {
+
+                        new Pizza( "Margherita", "Pomodoro, Mozzarella", "/img/pizza-margherita.jpg", 5),
+                        new Pizza( "Diavola", "Pomodoro, Mozzarella, salame piccante", "/img/pizza-diavola.jpg", 7),
+                        new Pizza( "Marinara", "Pomodoro", "/img/pizza-marinara.jpg", 4),
+                        new Pizza( "Salsiccia", "Pomodoro, Mozzarella, salsiccia", "/img/pizza-salsiccia.jpg", 7),
+
+                    };
+
+                    return pizze;
+                }*/
+
+        public IActionResult Privacy()
         {
             return View();
         }
