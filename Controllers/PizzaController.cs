@@ -18,36 +18,40 @@ namespace la_mia_pizzeria_static.Controllers
         public IActionResult Index()
         {
 
-            return View();
+            using (Restaurant db = new())
+            {
+                
+                List<Pizza> pizzas = db.ListaPizze.OrderBy(pizza => pizza.PizzaId).ToList<Pizza>();
+
+                return View("Index", pizzas);
+            }
         }
 
         [HttpGet]
-        public IActionResult CreateGet()
+        public IActionResult Create()
         {
-            return View("Create");
+            return View();
         }
 
 
         [HttpPost]
         public IActionResult Create(Pizza data)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return View(data);
+                return View();
             }
-            
          
-            using(Restaurant restaurant = new Restaurant())
+            using(Restaurant db = new Restaurant())
             {
-                Pizza newPizza = new Pizza(); //creo nuova pizza
-
+                Pizza newPizza = new Pizza(); //istanzio una nuova pizza
                 newPizza.Name = data.Name;
                 newPizza.Image = data.Image;
                 newPizza.Description = data.Description;
                 newPizza.Price = data.Price;
 
-                restaurant.ListaPizze.Add(newPizza);
-                restaurant.SaveChanges();
+                db.ListaPizze.Add(newPizza);
+                db.SaveChanges();
             }
 
             return RedirectToAction("Index");
@@ -60,19 +64,7 @@ namespace la_mia_pizzeria_static.Controllers
               return View(Pizzas()[id]);
           }*/
 
-        /*        public List<Pizza> Pizzas()
-                {
-                    List<Pizza> pizze = new List<Pizza> {
-
-                        new Pizza( "Margherita", "Pomodoro, Mozzarella", "/img/pizza-margherita.jpg", 5),
-                        new Pizza( "Diavola", "Pomodoro, Mozzarella, salame piccante", "/img/pizza-diavola.jpg", 7),
-                        new Pizza( "Marinara", "Pomodoro", "/img/pizza-marinara.jpg", 4),
-                        new Pizza( "Salsiccia", "Pomodoro, Mozzarella, salsiccia", "/img/pizza-salsiccia.jpg", 7),
-
-                    };
-
-                    return pizze;
-                }*/
+      
 
         public IActionResult Privacy()
         {
