@@ -61,13 +61,12 @@ namespace la_mia_pizzeria_static.Controllers
          public IActionResult Detail(int id)
           {
             Restaurant db = new Restaurant();
-            
-            Pizza PizzaDetail = db.ListaPizze.Where(p => p.PizzaId == id ).FirstOrDefault(); 
 
-              return View(PizzaDetail);
+            Pizza PizzaDetail = db.ListaPizze.Where(p => p.PizzaId == id).FirstOrDefault();
+
+            return View(PizzaDetail);
           }
 
-      
 
         public IActionResult Privacy()
         {
