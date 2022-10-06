@@ -18,7 +18,7 @@ namespace la_mia_pizzeria_static.Controllers
         public IActionResult Index()
         {
 
-            using (Restaurant db = new())
+            using (Restaurant db = new Restaurant())
             {
                 
                 List<Pizza> pizzas = db.ListaPizze.OrderBy(pizza => pizza.PizzaId).ToList<Pizza>();
@@ -58,11 +58,14 @@ namespace la_mia_pizzeria_static.Controllers
         }
 
 
-        /*  public IActionResult Detail(int id)
+         public IActionResult Detail(int id)
           {
+            Restaurant db = new Restaurant();
+            
+            Pizza PizzaDetail = db.ListaPizze.Where(p => p.PizzaId == id ).FirstOrDefault(); 
 
-              return View(Pizzas()[id]);
-          }*/
+              return View(PizzaDetail);
+          }
 
       
 
